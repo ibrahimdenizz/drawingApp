@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/client/style.css">
+    <title>Drawing App</title>
+</head>
+<body>
+    <div class="d-flex">
+        <p class="m-2" id="size"></p>
+        <div id="plus" class="m-2">
+            <i class="fas fa-plus"></i>
+        </div>
+        <div id="minus" class="m-2">
+            <i class="fas fa-minus"></i>
+        </div>
+        <div class="color" id="red" style="background-color: red"></div>
+        <div class="color" id="blue" style="background-color: blue"></div>
+        <div class="color" id="#AED6F1" style="background-color: #AED6F1"></div>
+        <div class="color" id="white" style="background-color: white"></div>
+        <div class="color" id="black" style="background-color: black"></div>
+        <div class="color" id="#FFFF00" style="background-color: #FFFF00"></div>
+        <div class="color" id="#C0C0C0" style="background-color: #C0C0C0"></div>
+        <div class="color" id="#8E44AD" style="background-color: #8E44AD"></div>
+        <div class="color" id="#2ECC71" style="background-color: #2ECC71"></div>
+        <div class="color" id="#1f618d" style="background-color: #1f618d"></div>
+        <div class="color" id="#c9a22157" style="background-color: #c9a22157"></div>
+    </div>
+    
+    <canvas id="canvas"></canvas>
+    <script src="https://kit.fontawesome.com/0920eaa432.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="https://cdn.socket.io/3.1.1/socket.io.min.js" integrity="sha384-gDaozqUvc4HTgo8iZjwth73C6dDDeOJsAgpxBcMpZYztUfjHXpzrpdrHRdVp8ySO" crossorigin="anonymous"></script>
+    <script src="/client/index.js"></script>
+</body>
+</html>
