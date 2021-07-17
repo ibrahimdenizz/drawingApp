@@ -4,8 +4,32 @@
   box-sizing: border-box;
 }
 
+body {
+  margin: 5px;
+}
+
+.wrapper {
+  margin: 5px;
+  display: flex;
+}
+
+.size-value {
+  flex-basis: 1.5%;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.size-icon {
+  padding: 0.5rem;
+  padding-bottom: 0.1rem;
+}
+
 #canvas {
   border: 1px solid black;
+}
+#colors-map {
+  display: flex;
 }
 
 .color {
@@ -13,4 +37,17 @@
   width: 20px;
   height: 20px;
   border: 1px solid black;
+  border-radius: 50%;
+  margin: 0 0.2em;
 }
+
+.active-color {
+  border: 3px solid green;
+}
+
+/* Hover */
+.size-icon:hover {
+  background-color: grey;
+}
+
+/* Hover */

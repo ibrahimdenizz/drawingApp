@@ -1,4 +1,8 @@
 window.addEventListener("load", () => {
+  addColorsMap();
+  let prevColorEl = document.querySelector("#black");
+  prevColorEl.classList.add("active-color");
+
   const socket = io();
 
   const plus = document.querySelector("#plus");
@@ -8,8 +12,13 @@ window.addEventListener("load", () => {
   const canvas = document.querySelector("#canvas");
   const ctx = canvas.getContext("2d");
 
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth - 15;
+  canvas.height = window.innerHeight - 70;
+
+  window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth - 15;
+    canvas.height = window.innerHeight - 70;
+  });
 
   let painting = false;
   let paintColor = "black";
@@ -17,38 +26,6 @@ window.addEventListener("load", () => {
     prevClientY = 0;
   let lineWidth = 5;
   size.innerHTML = lineWidth;
-
-  function startPositioning(e) {
-    painting = true;
-    socket.emit("finishedPosition", "finish");
-    prevClientX = e.clientX;
-    prevClientY = e.clientY;
-    draw(e);
-  }
-
-  function finishedPosition() {
-    painting = false;
-    socket.emit("finishedPosition", "finish");
-  }
-
-  function draw(e) {
-    if (painting) {
-      socket.emit("draw", {
-        x: e.clientX,
-        y: e.clientY,
-        color: paintColor,
-        prevX: prevClientX,
-        prevY: prevClientY,
-        lineWidth,
-      });
-      prevClientX = e.clientX;
-      prevClientY = e.clientY;
-    }
-  }
-
-  function changeColor(e) {
-    paintColor = e.target.id;
-  }
 
   socket.on("finishedPosition", () => {
     ctx.beginPath();
@@ -80,4 +57,61 @@ window.addEventListener("load", () => {
   canvas.addEventListener("mousedown", startPositioning);
   canvas.addEventListener("mouseup", finishedPosition);
   canvas.addEventListener("mousemove", draw);
+
+  function startPositioning(e) {
+    painting = true;
+    socket.emit("finishedPosition", "finish");
+    prevClientX = e.clientX;
+    prevClientY = e.clientY;
+    draw(e);
+  }
+
+  function finishedPosition() {
+    painting = false;
+    socket.emit("finishedPosition", "finish");
+  }
+
+  function draw(e) {
+    if (painting) {
+      socket.emit("draw", {
+        x: e.clientX,
+        y: e.clientY,
+        color: paintColor,
+        prevX: prevClientX,
+        prevY: prevClientY,
+        lineWidth,
+      });
+      prevClientX = e.clientX;
+      prevClientY = e.clientY;
+    }
+  }
+
+  function changeColor(e) {
+    paintColor = e.target.id;
+    if (prevColorEl) prevColorEl.classList.remove("active-color");
+    e.target.classList.add("active-color");
+    prevColorEl = e.target;
+  }
 });
+
+const COLORS = [
+  "red",
+  "blue",
+  "black",
+  "white",
+  "#FFFF00",
+  "#C0C0C0",
+  "#8E44AD",
+  "#2ECC71",
+  "#1f618d",
+  "#c9a22157",
+  "#AED6F1",
+];
+
+function addColorsMap() {
+  const colorsMap = document.getElementById("colors-map");
+
+  COLORS.forEach((color) => {
+    colorsMap.innerHTML += `<div class="color" id=${color} style="background-color: ${color}"></div>`;
+  });
+}
